@@ -51,9 +51,9 @@ describe('content', () => {
     for (const s of all) expect(s).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
   });
 
-  it('architecture only on the four diagram projects; no snowflake identifiers', () => {
+  it('includes architecture on the diagram projects and omits Snowflake identifiers', () => {
     const withArch = content.projects.filter((p) => p.architecture).map((p) => p.slug);
-    expect(withArch).toEqual(['techhiring', 'national-food-lakehouse', 'wellmom', 'partpilot']);
+    expect(withArch).toEqual(['techhiring', 'national-food-lakehouse', 'wellmom', 'smokeguard', 'partpilot']);
     const s = JSON.stringify(content);
     expect(s).not.toMatch(/snowflakecomputing|\.snowflake\.com/i);
     expect(s).not.toMatch(/snowflake\W{0,3}(account|identifier|locator)/i);

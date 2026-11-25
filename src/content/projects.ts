@@ -237,6 +237,10 @@ const entries: Project[] = [
       { heading: 'Streaming inference', body: 'OpenCV and Flask stream video at low latency and run inference on every frame.' },
       { heading: 'Live alerts', body: 'The Flutter client shows real-time alerts with bounding boxes and confidence scores. Hazards at a petrol pump are detected in under a second.' },
     ],
+    architecture: {
+      src: '/media/smokeguard/architecture.png',
+      caption: 'OpenCV and YOLOv8 mark cigarettes in camera frames. Flask sends the annotated video and smoking alerts to the Flutter app.',
+    },
     metrics: [
       { value: '<1 s', label: 'hazard detection' },
       { value: '1st', label: 'place, Digiwar #1' },
