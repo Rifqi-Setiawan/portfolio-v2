@@ -22,16 +22,16 @@ const entries: Project[] = [
       stack: ['Go', 'PostgreSQL', 'Next.js', 'REST API', 'k6', 'Docker'],
     },
     links: { live: 'https://tribunpass.rifqisetiawan.my.id/', github: TRIBUN },
-    cover: '/media/tribunpass/cover-1200.webp',
+    cover: '/media/tribunpass/cover-1200.webp?v=e599db053b63',
     media: [
-      full('/media/tribunpass/01.webp', 'TribunPass match-day page listing ticket categories and remaining stock', 3 / 2),
+      full('/media/tribunpass/ticket-office.webp', 'TribunPass ticket office showing Reguler and VIP availability for the Nusantara Cup Final', 1836 / 1180),
       full('/media/tribunpass/02.webp', 'TribunPass checkout with a five-minute payment countdown for two tickets', 16 / 10),
       full('/media/tribunpass/03.webp', 'TribunPass organizer dashboard showing sales and capacity', 16 / 10),
     ],
     how: [
       {
         heading: 'A two-ticket checkout',
-        body: 'A fan books 2 Reguler tickets at Rp75,000 each. Stock drops from 10 to 8, and the fan has 5 minutes to pay Rp150,000. Paying issues two tickets, each with its own QR code.',
+        body: 'In the demo, a fan books 2 Reguler tickets at Rp75,000 each. Stock drops from 10 to 8, and the fan has 5 minutes to pay Rp150,000. A successful simulated payment issues two tickets, each with its own QR code.',
       },
       {
         heading: 'Reserving a group atomically',
@@ -50,6 +50,10 @@ const entries: Project[] = [
         body: 'Four simultaneous requests for 4 tickets each against 10 places: two groups got 8 tickets and 2 remained. Replaying a payment for 3 tickets on two servers gave one paid order, 3 ticket IDs and Rp225,000 revenue.',
       },
     ],
+    architecture: {
+      src: '/media/tribunpass/ticket-flow.png',
+      caption: 'A two-ticket reservation from stock check to settlement. Payment issues both e-tickets, while expiry releases both places back into stock.',
+    },
     metrics: [
       { value: '8 / 2', label: 'sold / left, 4 x 4 requests vs 10 places' },
       { value: '5 min', label: 'hold before the group is released' },

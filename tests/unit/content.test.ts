@@ -11,9 +11,9 @@ describe('content', () => {
     expect(content.projects.map((p) => p.slug)).toEqual(slugs);
   });
 
-  it('versions both KMS cover URLs when either image changes', () => {
-    const project = bySlug('agentic-ai-kms');
-    const paths = [1200, 2000].map(width => `/media/agentic-ai-kms/cover-${width}.webp`);
+  it.each(['agentic-ai-kms', 'tribunpass'])('versions both %s cover URLs when either image changes', slug => {
+    const project = bySlug(slug);
+    const paths = [1200, 2000].map(width => `/media/${slug}/cover-${width}.webp`);
     const hash = createHash('sha256');
     for (const path of paths) hash.update(readFileSync(`public${path}`));
     const revision = hash.digest('hex').slice(0, 12);
@@ -64,7 +64,7 @@ describe('content', () => {
 
   it('includes architecture on the diagram projects and omits Snowflake identifiers', () => {
     const withArch = content.projects.filter((p) => p.architecture).map((p) => p.slug);
-    expect(withArch).toEqual(['techhiring', 'national-food-lakehouse', 'wellmom', 'smokeguard', 'tel-u-cup', 'agentic-ai-kms', 'partpilot']);
+    expect(withArch).toEqual(['tribunpass', 'techhiring', 'national-food-lakehouse', 'wellmom', 'smokeguard', 'tel-u-cup', 'agentic-ai-kms', 'partpilot']);
     const s = JSON.stringify(content);
     expect(s).not.toMatch(/snowflakecomputing|\.snowflake\.com/i);
     expect(s).not.toMatch(/snowflake\W{0,3}(account|identifier|locator)/i);
