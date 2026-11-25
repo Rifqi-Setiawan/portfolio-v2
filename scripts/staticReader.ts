@@ -43,7 +43,7 @@ export function staticReader(state: State | null, c: SiteContent): string {
       <h2>Stack</h2><p>${about.stack.map(h).join(', ')}</p>`;
   } else if (state.kind === 'contacts') {
     body = '<h1>Contacts</h1>' + list([link(profile.email, 'mailto:' + profile.email),
-      link('LinkedIn', profile.linkedin), link('GitHub', profile.github), link('WhatsApp', profile.whatsapp)]);
+      link('LinkedIn', profile.linkedin), link('GitHub', profile.github), link('Instagram', profile.instagram)]);
   } else {
     body = `<h1>${h(profile.name)}</h1><p>${h([...profile.heroLead, ...profile.heroRole].join(' '))}</p>
       <p>${h(about.lead)}</p>${link('View all projects', '/portfolio')}`;

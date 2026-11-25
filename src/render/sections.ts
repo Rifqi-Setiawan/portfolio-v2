@@ -182,7 +182,7 @@ function contacts(c: SiteContent): string {
     ['LinkedIn', p.linkedin],
     ['GitHub', p.github],
     ['Email', `mailto:${p.email}`],
-    ['WhatsApp', p.whatsapp],
+    ['Instagram', p.instagram],
   ]
     .map(
       ([l, href]) =>

@@ -34,7 +34,7 @@ export type Profile = {
   email: string;
   linkedin: string;
   github: string;
-  whatsapp: string;
+  instagram: string;
   location: string;
   timezone: string;
 };

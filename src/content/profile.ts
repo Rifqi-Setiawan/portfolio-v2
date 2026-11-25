@@ -8,7 +8,7 @@ export const profile: Profile = {
   email: 'rifqis232@gmail.com',
   linkedin: 'https://www.linkedin.com/in/rifqistwn/',
   github: 'https://github.com/Rifqi-Setiawan',
-  whatsapp: 'https://wa.me/6282178830078',
+  instagram: 'https://www.instagram.com/rifqi.setiawann/',
   location: 'Indonesia',
   timezone: 'Asia/Jakarta',
 };
