@@ -293,23 +293,30 @@ const entries: Project[] = [
     palette: { bg: '#dcd8c4', fg: '#1a1b14', accent: '#5d7a1f' },
     headline: { dim: 'Messy farm spreadsheets, ', strong: 'turned into usable knowledge.' },
     about:
-      'An agentic pipeline that reads messy agricultural Excel files, aligns them to one schema, and loads clean data into DuckDB and PostgreSQL for a chili farming knowledge system.',
+      'CABAI-KMS turns field spreadsheets into a standard workbook of chili traits by variety. Researchers can review uncertain matches and include plant photos from Google Drive.',
     facts: {
       context: 'Agentic AI for Adaptive Knowledge Acquisition',
       work: 'Agent workflow, data pipeline',
       role: 'Agentic AI & Data Pipeline Engineer',
-      stack: ['Python', 'FastAPI', 'DuckDB', 'PostgreSQL', 'Agentic AI', 'Excel engine'],
+      stack: ['Python', 'Streamlit', 'LangGraph', 'openpyxl', 'SQLite', 'PostgreSQL'],
     },
     links: {},
     cover: '/media/agentic-ai-kms/cover-1200.webp',
-    media: [full('/media/agentic-ai-kms/01.webp', 'Chili farming knowledge system dashboard mockup', 4 / 3)],
-    how: [
-      { heading: 'Agentic workflow', body: 'Agents parse spreadsheet structure, align columns to a shared schema, and run automated quality assertions.' },
-      { heading: 'One clean store', body: 'Messy Excel files end up in unified DuckDB and PostgreSQL tables. Anomalies are quarantined instead of loaded.' },
-      { heading: 'Traceable', body: 'Audit trails and temporal provenance show where each value came from. Manual cleaning dropped by more than 90%.' },
+    media: [
+      full('/media/agentic-ai-kms/01.webp', 'CABAI-KMS input screen for a field workbook and an optional photo folder', 4 / 3),
+      full('/media/agentic-ai-kms/result-inspector.webp', 'Inspektor Hasil showing 10 accepted attribute mappings and 3 awaiting human review in one evaluation run', 1600 / 1100),
     ],
+    how: [
+      { heading: 'Match field labels', body: 'LangGraph starts by reading the worksheet. Exact names and known aliases map directly. For other labels, the system retrieves candidate attributes and asks a language model to rank them.' },
+      { heading: 'Review uncertain matches', body: 'The verifier checks each mapping before values are written. In Inspektor Hasil, a reviewer can accept a suggestion, choose a different attribute or mark it as unmatched.' },
+      { heading: 'Add plant photos', body: 'If a Google Drive folder is supplied and images are found, the vision step identifies the variety and plant part. Eligible image links are added to the exported Excel workbook.' },
+    ],
+    architecture: {
+      src: '/media/agentic-ai-kms/agent-workflow.png',
+      caption: 'How LangGraph maps field labels to chili traits, routes uncertain matches for review, and optionally adds plant photos to the workbook.',
+    },
     metrics: [{ value: '>90%', label: 'less manual cleaning' }],
-    code: [],
+    code: [{ label: 'LangGraph workflow', href: 'https://github.com/Rifqi-Setiawan/AgenticAI_CabaiKMS/blob/0975bdac67c74eabf042248e5eefbcbd4466a208/src/orchestrator/graph.py#L181' }],
   },
   {
     slug: 'partpilot',
