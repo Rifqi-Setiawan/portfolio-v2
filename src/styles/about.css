@@ -1,0 +1,113 @@
+/* The full-screen photo and points are drawn beneath the scrolling article. */
+.about {
+  --bg: #d9ccb4; --fg: #1d1915; --fg-rgb: 29 25 21; --accent: #b5401e;
+  z-index: 4; color: var(--fg);
+}
+.about__stage { position: absolute; inset: 0; pointer-events: none; }
+:is(.about-still, html:has(.stage--lost)) .about__stage { background-color: var(--bg); }
+:is(.about-still, html:has(.stage--lost)) .about__stage::before, :is(.about-still, html:has(.stage--lost)) .about__stage::after {
+  content: ''; position: absolute; inset: 0; background: url('/scenes/about/photo.webp') no-repeat;
+  background-size: cover; background-position: calc(50% - 10.5vw) calc(50% - 4.55svh);
+}
+:is(.about-still, html:has(.stage--lost)) .about__stage::before { clip-path: inset(0 59.4% 0 0); }
+:is(.about-still, html:has(.stage--lost)) .about__stage::after {
+  clip-path: inset(0 0 0 40.6%); filter: grayscale(1); opacity: .28; mix-blend-mode: multiply;
+  mask-image: radial-gradient(circle at center, black .65px, transparent 1px); mask-size: 2px 2px;
+}
+html[data-state='about'] .logo { color: white; }
+.about__scroll {
+  position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: none; pointer-events: auto;
+}
+.about__scroll::-webkit-scrollbar { display: none; }
+.about__content {
+  position: relative; container-type: inline-size; visibility: hidden;
+  padding: max(12rem, calc(50svh - 12.7rem)) 2.4rem 14rem 42.4%;
+  font-size: 1.8rem; line-height: 2.3rem; letter-spacing: -.045em;
+}
+.about__content.is-revealed { visibility: inherit; }
+.about__content p, .about__content h3, .about__content ul { margin: 0; }
+.about__title {
+  margin: 0; text-align: right; color: var(--accent); font-weight: 600;
+  font-size: min(18.2rem, 12.5cqw); line-height: 1.06; letter-spacing: -.06em; word-spacing: .09em;
+}
+.about__line { display: block; width: fit-content; margin-left: auto; white-space: nowrap; }
+.about__content .about__lead {
+  margin: 2.7rem 0 0 auto; width: 56.2%; max-width: 61rem;
+  font-size: 1.8rem; line-height: 2.3rem; letter-spacing: -.045em;
+}
+.about__signature {
+  display: block; width: clamp(84px, 14rem, 116px); aspect-ratio: 284 / 222;
+  margin-top: 1.4rem;
+}
+.about__signature::before {
+  content: ''; display: block; height: 100%; background-color: currentColor;
+  mask: url('/rifqi-signature.png') left center / contain no-repeat;
+}
+
+.about__block, .about__cta { margin-top: 14.69rem; }
+.about__block { position: relative; border-top: 1px solid rgb(var(--fg-rgb) / 0.25); padding-top: 2.94rem; }
+.about__label { display: block; width: fit-content; margin-bottom: 4.9rem; color: rgb(var(--fg-rgb) / 0.6); }
+.about__dim { opacity: 0.55; }
+.about__stat strong, .about__num, .about__name { color: var(--accent); }
+.about__numbers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5.88rem 2.45rem; }
+.about__numbers .about__label, .about__items .about__label { grid-column: 1 / -1; margin-bottom: -1.96rem; }
+.about__stat { display: flex; flex-direction: column; gap: 1.22rem; }
+.about__stat strong { font-size: 9.31rem; line-height: 1; font-weight: 600; }
+.about__items { display: grid; grid-template-columns: 1fr 1fr; gap: 5.88rem 3.92rem; }
+.about__item { display: flex; flex-direction: column; gap: 1.47rem; }
+.about__name { font-size: 3.43rem; line-height: 1; font-weight: 600; letter-spacing: -0.05em; }
+.about__values { display: flex; flex-direction: column; gap: 5.88rem; }
+.about__big { font-size: 5.39rem; line-height: 0.95; font-weight: 600; margin-bottom: 1.47rem; }
+.about__value p + p { margin-top: 1.47rem; }
+.about__awards-list { padding: 0; list-style: none; display: grid; gap: 1.96rem; }
+.about__awards-list li { display: grid; grid-template-columns: 6.12rem 1fr; column-gap: 1.47rem; }
+.about__awards-list em { grid-column: 2; font-style: normal; color: rgb(var(--fg-rgb) / 0.6); }
+.about__list { padding: 0; list-style: none; }
+.about__list li { display: inline; white-space: nowrap; font-size: 3.92rem; line-height: 1.25; font-weight: 600; letter-spacing: -0.05em; }
+.about__list li > span::after { content: '/'; margin: 0 0.12em 0 0.3em; font-weight: 400; color: var(--accent); }
+.about__list li:last-child > span::after { content: none; }
+.about__cta { display: flex; flex-direction: column; gap: 4.41rem; align-items: flex-start; }
+.about__motto { font-size: 5.88rem; line-height: 0.95; font-weight: 600; }
+.about__button { display: grid; place-items: center; width: 100%; max-width: 48.98rem; height: 8.57rem; border-radius: 0.73rem; background: var(--fg); color: var(--bg); letter-spacing: -0.03em; font-size: 1.96rem; }
+
+@media (orientation: landscape) and (width > 767px) {
+  .about__block, .about__cta { width: 56.2%; margin-inline-start: auto; }
+  .about__numbers, .about__items, .about__values, .about__awards-list {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3.92rem;
+  }
+  .about__values .about__label { grid-column: 1 / -1; margin-bottom: -1.96rem; }
+  .about__big { font-size: 3.92rem; line-height: 1.05; }
+  .about__awards-list { row-gap: 3.92rem; }
+  .about__awards-list li { display: flex; flex-direction: column; }
+}
+
+@media (orientation: portrait), (width <= 767px) {
+  :is(.about-still, html:has(.stage--lost)) .about__stage::before, :is(.about-still, html:has(.stage--lost)) .about__stage::after {
+    background-size: auto calc(var(--mobile-portrait-height) * 100%); background-position: center top;
+  }
+  :is(.about-still, html:has(.stage--lost)) .about__stage::before {
+    background-color: #090909; clip-path: inset(0 0 calc((1 - var(--mobile-panel-start)) * 100%) 0);
+  }
+  :is(.about-still, html:has(.stage--lost)) .about__stage::after {
+    clip-path: inset(calc(var(--mobile-panel-start) * 100%) 0 0 0);
+    mask-image: radial-gradient(circle at center, black .65px, transparent 1px),
+      linear-gradient(to bottom, black calc(var(--mobile-panel-start) * 100%), transparent calc(var(--mobile-point-fade-end) * 100%));
+    mask-size: 2px 2px, 100% 100%;
+    mask-repeat: repeat, no-repeat;
+    mask-composite: intersect;
+  }
+  html[data-state='about'] .header { --fg: white; --fg-dim: rgb(255 255 255 / .65); }
+  .about__content { padding: calc((var(--mobile-panel-start) + .03) * 100dvh) 2rem 8rem; font-size: max(14px, 1.6rem); line-height: 1.375; }
+  .about__title { font-size: min(7.6rem, 12.5cqw); }
+  .about__content .about__lead { width: auto; margin: 2rem 0 0; font-size: max(14px, 1.6rem); line-height: 1.375; }
+  .about__signature {
+    width: clamp(84px, 9.5rem, 100px);
+    filter: drop-shadow(0 0 .45px currentColor) drop-shadow(0 0 1px var(--bg)) drop-shadow(0 0 1px var(--bg));
+  }
+  .about__block, .about__cta { margin-top: 7rem; }
+  .about__items { grid-template-columns: 1fr; }
+  .about__list li { font-size: 2.4rem; }
+  .about__motto { font-size: 3.6rem; }
+  .about__stat strong { font-size: 5.6rem; }
+}

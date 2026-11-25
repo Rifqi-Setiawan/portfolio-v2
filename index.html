@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rifqi</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>html{background:#252525}body{visibility:hidden}</style>
+<script>(function(){var d=document.documentElement,p=location.pathname.toLowerCase().replace(/\/+/g,"/").replace(/\/index\.html$/,"").replace(/\/$/,""),o="hero";if(p=="/portfolio"||p=="/work")o="portfolio";else if(p=="/about")o="about";else if(p=="/contacts")o="contacts";else if(p.indexOf("/work/")==0)o=/^\/work\/(__SLUGS__)$/.test(p)?"case":"portfolio";d.dataset.opened=o;d.classList.add("js","is-intro")})()</script>
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+{
+  const route = document.documentElement.dataset.opened;
+  const scene = route === 'about' ? 'about' : 'hero';
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const photoFirst = route === 'case' || route === 'contacts';
+  const files = still ? ['photo.webp'] : photoFirst ? ['photo.webp', 'color.webp']
+    : ['preset.json', 'color.webp', 'photo.webp', 'depth.webp'];
+  for (const file of files) {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    const cssPhoto = still || (route === 'case' && file === 'photo.webp');
+    link.as = cssPhoto ? 'image' : 'fetch';
+    if (!cssPhoto) link.crossOrigin = 'anonymous';
+    link.href = '/scenes/' + scene + '/' + file;
+    document.head.append(link);
+  }
+}
+</script>
+</head>
+<body>
+<!--app-->
+<script type="module" src="/src/start.ts"></script>
+</body>
+</html>

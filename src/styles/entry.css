@@ -1,0 +1,27 @@
+/* Hold the deep-linked content while its name card or scene is still preparing. */
+.is-intro:not([data-opened='hero']):has(.preloader:not([data-arriving])) main > section,
+.is-intro:not([data-opened='hero']):has(.preloader:not([data-arriving])) .stage {
+  visibility: hidden;
+}
+.is-intro:not([data-opened='hero']):has(.preloader[data-arriving]) :is(.logo [data-goo], .nav__link) {
+  opacity: 1;
+}
+
+/* Use the same photo for the centre crop and its defocused perimeter until depth is ready. */
+.stage.has-case-poster {
+  overflow: hidden;
+  background: var(--bg-dark);
+  --entry-poster-alpha: 0;
+}
+.stage.has-case-poster::before, .stage.has-case-poster::after {
+  content: '';
+  position: absolute;
+  inset: -1vh;
+  pointer-events: none;
+  background: url(/scenes/hero/case-poster.webp) center / cover no-repeat;
+  opacity: var(--entry-poster-alpha);
+}
+.stage.has-case-poster::after {
+  inset: 9.4%;
+  mask-image: radial-gradient(ellipse 72% 72%, black 57%, transparent 97%);
+}

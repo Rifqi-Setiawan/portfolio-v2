@@ -1,0 +1,30 @@
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/plus-jakarta-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/plus-jakarta-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/plus-jakarta-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/plus-jakarta-sans-latin-700-normal.woff2') format('woff2'); }
+
+:root {
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --bg-dark: #252525;
+  --title-photo: #f1da75;
+  --panel-bg: #f4f2ee;
+  --panel-fg: #252525;
+  --accent: #f1da75;
+  --side: 6rem;
+  --gap: 2rem;
+  --title-weight: 600;
+  --title-tracking: -0.09em;
+  --preloader-title-size: 11.6rem;
+  --preloader-title-lh: 14.8rem;
+  --preloader-title-left: 6rem;
+  --preloader-title-top: calc(50% - 21.1rem);
+}
+
+/* Root size matches the reference: 1rem = 100vw/1920*10 on desktop */
+html { font-size: .520833vw; }
+
+/* Mobile layout */
+@media (orientation: portrait), (width <= 767px) {
+  html { font-size: min(2.5641vw, 1.18483svh); }
+  :root { --side: 2rem; --gap: 1rem; }
+}

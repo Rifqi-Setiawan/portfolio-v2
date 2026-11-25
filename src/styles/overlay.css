@@ -1,0 +1,7 @@
+/* The stage applies this finish in its display pass. A still gets a single painted tile. */
+.overlay { display: none; }
+.stage--still ~ .overlay, .stage--lost ~ .overlay, .about-still .overlay,
+[data-state='contacts'].has-contact-surface:not(.is-expanding-eyes) .overlay {
+  display: block; position: fixed; inset: 0; z-index: 60;
+  pointer-events: none; background: url('/grain.png') repeat; opacity: .035;
+}

@@ -1,0 +1,15 @@
+.case__dialog {
+  position: fixed; inset: 0; margin: 0; border: 0;
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  padding: max(48px, 5vh) max(20px, 4vw); background: rgb(18 17 16 / .96); color: white;
+}
+.case__dialog[open] { display: grid; place-items: center; }
+.case__dialog::backdrop { background: #141311; }
+.case__dialog form { position: absolute; right: 1rem; top: 1rem; }
+.case__dialog button {
+  display: grid; place-items: center; width: 44px; height: 44px; border: 0;
+  background: transparent; font: inherit; font-size: 32px; line-height: 1; cursor: pointer;
+}
+.case__dialog img {
+  width: 100%; height: 100%; min-height: 0; object-fit: contain;
+}

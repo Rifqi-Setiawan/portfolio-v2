@@ -1,0 +1,105 @@
+{
+  "particles": {
+    "count": 200000,
+    "countMobile": 60000,
+    "size": 0.5,
+    "sizeRandom": 0.4,
+    "sizeAttenuation": true,
+    "density": 1.5,
+    "depthDensity": 1.4
+  },
+  "depth": {
+    "scale": 0.16,
+    "curve": 1.01,
+    "edgeCutoff": 0.29,
+    "fade": 1,
+    "occlusion": true
+  },
+  "look": {
+    "colorMode": "mono-light",
+    "background": "#252525",
+    "blending": "normal",
+    "brightness": 3.15,
+    "dropout": 0,
+    "jitter": 0,
+    "scatter": 0,
+    "spread": 2,
+    "duoA": "#1d2a6b",
+    "duoB": "#ffb46b"
+  },
+  "morph": {
+    "word": "Rifqi Setiawan",
+    "hold": 0.3,
+    "duration": 0.92,
+    "stagger": 0.38,
+    "order": "subject-first",
+    "ease": "inOutSine",
+    "curlAmp": 0.3,
+    "curlScale": 0.9,
+    "curlSpeed": 0.4,
+    "burst": 0,
+    "swirl": 0.35,
+    "zPush": 0
+  },
+  "intro": {
+    "assemble": 1.6,
+    "font": "\"Plus Jakarta Sans\", system-ui, sans-serif",
+    "weight": 500,
+    "tracking": 0,
+    "size": 0.2,
+    "order": "left-right",
+    "front": 0.93,
+    "mode": "fly",
+    "flight": 1.6,
+    "spread": 1,
+    "loose": 0.06
+  },
+  "life": {
+    "move": 0.006,
+    "rest": 0.0015,
+    "restless": 0.2,
+    "speed": 0.35,
+    "settle": 2.5
+  },
+  "photo": {
+    "enabled": true,
+    "delay": 0.7,
+    "duration": 0.8,
+    "blur": 0,
+    "depthSoft": 0.45,
+    "limit": 8,
+    "grain": 0.3,
+    "lens": 0.17,
+    "lensSoftness": 1,
+    "trail": 1.9,
+    "rough": 1
+  },
+  "camera": {
+    "fov": 10,
+    "zoom": 1.015,
+    "centerX": 0.5,
+    "subjectX": 0.495,
+    "flyToX": 0.498,
+    "flyToY": 0.328,
+    "flyToZoom": 4.5,
+    "centerY": 0.515,
+    "limit": 13,
+    "parallax": 1,
+    "fit": "cover",
+    "focus": 0.8,
+    "aperture": 0.4,
+    "follow": 0.11
+  },
+  "interaction": {
+    "repelRadius": 0.11,
+    "repelForce": 0.037,
+    "repelDepth": 0.41,
+    "glow": 0
+  },
+  "recede": {
+    "zoom": 1,
+    "blur": 1.15,
+    "parallax": 1,
+    "limit": 7
+  }
+}

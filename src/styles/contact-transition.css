@@ -1,0 +1,12 @@
+/* The sheet covers the shared film-title canvas (50); the header stays available above it. */
+.is-contact-overlay .contacts { visibility: visible; z-index: 51; }
+.is-contact-overlay .header { z-index: 52; }
+.contacts__photo { position: absolute; inset: 0; overflow: hidden; visibility: hidden; pointer-events: none; }
+.contacts__photo img { display: block; position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; }
+.is-expanding-eyes .contacts { background: transparent; box-shadow: none; }
+.is-expanding-eyes .contacts::before { visibility: hidden; }
+.is-expanding-eyes .stage { background: #d9ccb4; }
+.is-expanding-eyes .contacts__eyes { visibility: hidden; }
+.has-contact-surface .header { --fg: #1d1915; --fg-dim: rgb(29 25 21 / .6); }
+.is-contact-overlay main > [data-contact-underlay] { visibility: visible; pointer-events: none; }
+.contacts:focus { outline: none; }

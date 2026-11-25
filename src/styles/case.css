@@ -1,0 +1,125 @@
+/* The fixed column and the media scroller share their edge at 67.1% of the viewport. */
+.case { z-index: 3; }
+.case__entry {
+  position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) 32.9%;
+  contain: strict; background-color: var(--bg-dark);
+  --case-inset: 2.4rem; --case-gallery-top: 8.7rem; --case-header: 5.6rem;
+}
+.case__entry[hidden] { display: none; }
+.case__panel, .case__media {
+  min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  /* Keep scrolling photos and text below the fixed site navigation. */
+  border-top: var(--case-header) solid transparent;
+  scrollbar-width: none; pointer-events: auto;
+}
+.case__panel::-webkit-scrollbar, .case__media::-webkit-scrollbar { display: none; }
+.case__media {
+  display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start; gap: var(--case-inset);
+  margin: 0; padding: calc(var(--case-gallery-top) - var(--case-header)) var(--case-inset) var(--case-inset); list-style: none;
+}
+.case__media li { min-width: 0; background: rgb(0 0 0 / .25); }
+.case__media li[data-aspect] { aspect-ratio: var(--case-aspect); }
+.case__media li[data-span='full'] { width: 100%; }
+.case__media li:first-child {
+  width: min(100%, calc((100svh - var(--case-gallery-top) - var(--case-inset)) * var(--case-aspect)));
+  margin-inline: auto;
+}
+.case__entry:not([hidden]) .case__media li:first-child { will-change: opacity; }
+.case__media li.is-decoding { background: var(--case-preview) center / cover no-repeat; }
+.case__media li.is-decoding > img { opacity: 0; }
+.case__media li[data-span='half'] { width: calc((100% - var(--case-inset)) / 2); }
+.case__media li > img, .case__lead-bitmap {
+  display: block; width: 100%; height: 100%; object-fit: contain;
+}
+.case__media li.has-lead-bitmap { position: relative; }
+.has-lead-bitmap > img { opacity: 0; }
+.case__lead-bitmap { position: absolute; inset: 0; pointer-events: none; }
+.case__panel {
+  box-sizing: border-box; padding: calc(6.4rem - var(--case-header)) var(--case-inset) 5rem;
+  background: var(--panel-bg); color: var(--panel-fg);
+  font-size: 1.6rem; line-height: 2.2rem; letter-spacing: -.035em;
+}
+.case__panel:focus { outline: none; }
+.case__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.8rem; }
+.case__back {
+  display: inline-flex; align-items: center; gap: .6rem; margin-left: -.4rem;
+  font-weight: 500; color: color-mix(in srgb, var(--panel-fg) 65%, transparent);
+}
+.case__arrow { width: 2.4rem; height: 2.4rem; fill: none; stroke: currentColor; stroke-width: 1px; transform: rotate(90deg); }
+.case__count { color: color-mix(in srgb, var(--panel-fg) 55%, transparent); font-variant-numeric: tabular-nums; }
+.case__title {
+  margin: 0; width: fit-content; max-width: 100%;
+  font-size: 7.6rem; line-height: 8.4rem; letter-spacing: -.075em;
+  overflow-wrap: anywhere; color: var(--accent);
+}
+.case__headline {
+  max-width: 56rem; margin: 2.4rem 0 0; font-size: 4.4rem; line-height: 4.8rem;
+  font-weight: 500; letter-spacing: -.06em; text-wrap: pretty;
+}
+.case__dim { opacity: .45; }
+.case__about { max-width: 46rem; margin: 2.4rem 0 0; }
+.case__facts {
+  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  grid-template-rows: repeat(3, auto); grid-auto-flow: column; align-items: start;
+  gap: .6rem 2.4rem; margin: 3.2rem 0 0;
+}
+.case__facts > div { display: grid; grid-template-columns: 8rem minmax(0, 1fr); }
+.case__facts dt { color: color-mix(in srgb, var(--panel-fg) 55%, transparent); }
+.case__facts dd { margin: 0; overflow-wrap: anywhere; }
+.case__facts a { text-decoration: underline; text-underline-offset: .2em; margin-right: 1.2rem; }
+
+/* Model B */
+.case__how, .case__metrics, .case__code { margin-top: 6.86rem; padding-top: 2.94rem; border-top: 1px solid color-mix(in srgb, var(--panel-fg) 20%, transparent); }
+.case__label { margin: 0 0 2.94rem; font-size: 1.71rem; font-weight: 500; color: color-mix(in srgb, var(--panel-fg) 55%, transparent); letter-spacing: -0.02em; }
+.case__step { margin-bottom: 2.94rem; }
+.case__step h4 { margin: 0.49rem 0 0.73rem; font-size: 2.2rem; line-height: 2.69rem; font-weight: 600; letter-spacing: -0.04em; }
+.case__step p { margin: 0; }
+.case__num { color: var(--accent); font-feature-settings: 'tnum'; }
+.case__arch { margin: 0; background: var(--panel-bg); color: var(--panel-fg); }
+.case__arch-open { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.case__arch-open img { display: block; width: 100%; height: auto; }
+.case__arch figcaption { padding: 1.5rem 2rem; font-size: max(14px, 1.6rem); line-height: 1.5; }
+.case__arch figcaption strong { display: block; font-weight: 600; }
+.case__metrics ul, .case__code ul { margin: 0; padding: 0; list-style: none; }
+.case__metrics li { margin-bottom: 2.94rem; }
+.case__metrics strong { display: block; color: var(--accent); font-size: 6.86rem; line-height: 1; letter-spacing: -0.06em; font-weight: 600; }
+.case__metrics span { display: block; margin-top: 0.73rem; }
+.case__code li { padding: 0.98rem 0; border-top: 1px solid color-mix(in srgb, var(--panel-fg) 12%, transparent); }
+.case__code a, .case__nav a { text-decoration: underline; text-underline-offset: 0.2em; }
+.case__nav { display: flex; justify-content: space-between; gap: 2.45rem; margin-top: 6.86rem; }
+
+/* A single reading order on narrow screens: cover, case study, remaining images. */
+@media (orientation: portrait), (width <= 767px) {
+  :root { --mobile-case-bar: calc(5.4rem + env(safe-area-inset-top, 0px)); }
+  html[data-state='case'] .header, html.is-case-portfolio[data-palette] .header {
+    height: var(--mobile-case-bar); padding: env(safe-area-inset-top, 0px) 2rem 0;
+    background: var(--panel-bg); color: var(--panel-fg);
+  }
+  .case__entry {
+    --case-header: 0px;
+    top: var(--mobile-case-bar);
+    display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start;
+    overflow-y: auto; overscroll-behavior: contain; pointer-events: auto;
+  }
+  .case__media { display: contents; }
+  .case__media li { order: 2; }
+  .case__media li:first-child { order: 0; width: 100%; }
+  .case__media li[data-span='half'] { width: 50%; }
+  .case__panel { order: 1; width: 100%; overflow: visible; padding: 3.2rem 2rem 4rem; }
+  .case__top { margin-bottom: 2.4rem; }
+  .case__title { font-size: 5.2rem; line-height: 5.8rem; }
+  .case__headline { font-size: 3.2rem; line-height: 3.6rem; }
+  .case__facts { display: flex; flex-direction: column; gap: .8rem; }
+  .case__facts > div { width: 100%; }
+}
+
+/* The mesh travels on the stage while the case surface and portfolio share a frame. */
+.is-case-portfolio .case, .is-case-portfolio .portfolio { visibility: visible; }
+.case__entry:has(.case__media.is-projected) { background-color: transparent; }
+.is-case-portfolio .case__media.is-projected li { visibility: hidden; }
+.is-case-portfolio .case__media.is-projected li:first-child {
+  /* Prepare the actual landing image on a compositor layer beneath the travelling plane. */
+  visibility: visible; opacity: 0;
+}
+.is-case-portfolio .is-framed::after, .is-case-portfolio .is-framed::before { display: none; }
+html.is-case-portfolio[data-palette] .nav { --fg: var(--panel-fg); --fg-dim: color-mix(in srgb, var(--panel-fg) 60%, transparent); }

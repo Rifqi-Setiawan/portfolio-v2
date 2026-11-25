@@ -1,0 +1,3 @@
+[data-raster-goo] { position: relative; -webkit-text-fill-color: transparent; }
+.goo-raster { position: absolute; display: block; overflow: clip; pointer-events: none; }
+.goo-raster canvas { display: block; max-width: none; will-change: transform; }

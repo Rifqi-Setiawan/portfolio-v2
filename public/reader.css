@@ -1,0 +1,14 @@
+/* The static reader is used for a missing page and when scripting is disabled. */
+html { background: #252525; color-scheme: dark; }
+body { margin: 0; visibility: visible !important; background: #252525; color: #f6f1e8; }
+body > :not(noscript):not(.reader) { display: none !important; }
+.reader { max-width: 46em; margin: auto; padding: 2em 1.25em 4em; font: 16px/1.6 system-ui, sans-serif; overflow-wrap: anywhere; }
+.reader nav { display: flex; flex-wrap: wrap; gap: 1.25em; }
+.reader main { margin-top: 3em; }
+.reader h1 { color: #f1da75; font-size: clamp(2em, 6vw, 3.5em); line-height: 1.1; letter-spacing: -.045em; }
+.reader h2 { margin: 1.75em 0 .3em; font-size: 1.25em; }
+.reader a { color: #f1da75; text-decoration: underline; text-underline-offset: .2em; }
+.reader img { display: block; max-width: 100%; height: auto; }
+.reader__gallery { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25em; margin-block: 2em; }
+.reader__gallery figure { margin: 0; }
+.reader li { margin-block: .55em; }

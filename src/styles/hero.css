@@ -1,0 +1,119 @@
+/* Header, preloader, hero. Sections are shown by <html data-state>. */
+.stage { position: fixed; inset: 0; z-index: 0; background: var(--bg-dark); }
+.stage--still, .stage--lost { background: var(--bg-dark) url(/scenes/hero/photo.webp) center / cover no-repeat; }
+.stage--still canvas { display: none; }
+.stage--lost canvas { visibility: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  html.js[data-opened='hero'] .stage {
+    visibility: visible;
+    background: var(--bg-dark) url(/scenes/hero/photo.webp) center / cover no-repeat;
+  }
+}
+.veil { position: fixed; inset: 0; z-index: 1; opacity: 0; pointer-events: none; background: rgb(50 50 50 / 0.1); }
+
+main > section { position: fixed; inset: 0; visibility: hidden; pointer-events: none; }
+.is-hero-portfolio .hero,
+.is-hero-portfolio .portfolio,
+html[data-state='hero'] .hero,
+html[data-state='portfolio'] .portfolio,
+html[data-state='case'] .case,
+html[data-state='about'] .about,
+html[data-state='contacts'] .contacts { visibility: visible; }
+
+:root { --fg: #fff; --fg-dim: rgb(255 255 255 / 0.6); }
+
+/* Header */
+.header {
+  position: fixed; inset: 0 0 auto; z-index: 51;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 2.4rem 2.4rem 0; pointer-events: none; color: var(--fg);
+}
+.header a { pointer-events: auto; }
+.logo, .nav {
+  display: flex; font-size: 1.8rem; line-height: 2.3rem; font-weight: 500; letter-spacing: -0.06em;
+}
+.logo { gap: 0.4rem; }
+.logo span, .nav__link { padding-right: 0.06em; }
+.nav { gap: 1.4rem; }
+.nav__link { white-space: nowrap; color: var(--fg-dim); transition: color var(--nav-color-time) cubic-bezier(0.25, 1, 0.5, 1); }
+.nav__link:not(:last-child)::after { content: ','; }
+.nav__link:hover, .nav__link:focus-visible, .nav__link.is-current { color: var(--fg); }
+html[data-state='about'] .header,
+html[data-state='contacts'] .header { --fg: #1d1915; --fg-dim: rgb(29 25 21 / 0.6); }
+html[data-state='case'] .nav { --fg: var(--panel-fg, #1d1915); --fg-dim: color-mix(in srgb, var(--panel-fg, #1d1915) 60%, transparent); }
+
+/* The loader and hero share a baseline as the portrait resolves. */
+.preloader { position: fixed; inset: 0; z-index: 5; pointer-events: none; visibility: hidden; color: #fff; }
+.preloader__title {
+  position: absolute; margin: 0; display: flex; align-items: baseline; gap: 0.22em; white-space: nowrap;
+  top: var(--preloader-title-top); left: var(--preloader-title-left);
+  font-size: var(--preloader-title-size); line-height: var(--preloader-title-lh);
+  font-weight: var(--title-weight); letter-spacing: var(--title-tracking);
+}
+.preloader__title [data-goo] { padding-right: 0.09em; }
+.is-intro .preloader { visibility: inherit; }
+.is-intro .hero__title [data-goo],
+.is-intro .hero__hint,
+.is-intro .hero__arrow,
+.is-intro .logo [data-goo],
+.is-intro .nav__link { opacity: 0; }
+
+/* Hero */
+.hero { z-index: 2; color: #fff; }
+.hero a { pointer-events: auto; }
+.hero__title {
+  position: absolute; inset-inline: 0; margin: 0; height: var(--preloader-title-lh);
+  top: var(--preloader-title-top);
+  font-size: var(--preloader-title-size); line-height: var(--preloader-title-lh);
+  font-weight: var(--title-weight); letter-spacing: var(--title-tracking);
+  color: var(--title-photo); text-shadow: 0 0 16px rgb(241 218 117 / 0.35); pointer-events: none;
+}
+.hero__lead, .hero__tail { display: flex; align-items: baseline; }
+.hero__word, .hero__role, .hero__amp { display: inline-block; padding-right: 0.09em; white-space: nowrap; }
+.hero__amp { font-size: 0.8276em; line-height: 1.375; }
+/* Keep the four words together as the line folds into the glowing point. */
+.is-folding-title .film-titles { visibility: hidden; }
+.is-folding-title .hero__title [data-goo] {
+  color: var(--title-photo) !important; opacity: 1 !important;
+  text-shadow: 0 0 .08em #f6db7a, 0 0 .22em #e5b844;
+}
+.is-folding-title .hero::after {
+  content: ''; position: absolute; left: var(--blob-x); top: var(--blob-y);
+  width: clamp(13px, 1.8vw, 34px); aspect-ratio: 3.8; border-radius: 50%;
+  transform: translate(-50%, -50%); background: var(--title-photo);
+  box-shadow: 0 0 .55rem .22rem #f2c958, 0 0 1.4rem #d7962f; opacity: var(--blob-opacity, 0);
+}
+@media (orientation: landscape) and (width > 767px) {
+  .hero__title { --half-title-gap: 10.5%; }
+  .hero__lead, .hero__tail { position: absolute; top: 0; justify-content: space-between; }
+  .hero__lead { left: var(--side); right: calc(100% - var(--hero-subject-x) + var(--half-title-gap)); }
+  .hero__tail { left: calc(var(--hero-subject-x) + var(--half-title-gap)); right: var(--side); }
+  .hero__amp, .hero__role { padding-right: 0; }
+}
+.hero__scroll {
+  position: absolute; bottom: 6.3rem; left: 0; right: 0; margin-inline: auto; width: max-content;
+  display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  font-size: 1.8rem; line-height: 2.3rem; letter-spacing: -0.06em; white-space: nowrap; color: var(--fg-dim);
+}
+.hero__hint--touch { display: none; }
+@media (pointer: coarse) {
+  .hero__hint--pointer { display: none; }
+  .hero__hint--touch { display: inline-block; }
+}
+.hero__arrow { width: 2.4rem; height: 2.4rem; fill: none; stroke: var(--fg); stroke-width: 1px; overflow: visible; }
+
+@media (orientation: portrait), (width <= 767px) {
+  .header { padding: 1.6rem 2rem 0; }
+  .logo, .nav { font-size: 1.6rem; line-height: 2rem; }
+  .preloader__title { --preloader-title-size: 7.6rem; --preloader-title-lh: 9rem; top: calc(50% - 14rem); left: var(--side); flex-direction: column; gap: 0; }
+  .hero__title { --preloader-title-size: 7.6rem; --preloader-title-lh: 9rem; top: calc(50% - 14rem); height: 27rem; }
+  .hero__lead, .hero__tail { margin-inline: var(--side); gap: 1.3rem; }
+  .hero__scroll { font-size: 1.4rem; bottom: 4rem; }
+}
+
+/* Phone in landscape */
+.turn {
+  position: fixed; inset: 0; z-index: 70; display: none; place-items: center; margin: 0;
+  background: var(--bg-dark); color: #fff; font-size: 2.45rem; letter-spacing: -0.03em; text-align: center;
+}
+@media (orientation: landscape) and (height <= 500px) and (pointer: coarse) { .turn { display: grid; } }

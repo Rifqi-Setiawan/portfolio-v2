@@ -1,0 +1,107 @@
+{
+  "particles": {
+    "count": 150000,
+    "countMobile": 60000,
+    "size": 0.5,
+    "sizeRandom": 0.3,
+    "sizeAttenuation": true,
+    "density": 0.4,
+    "depthDensity": 2.2
+  },
+  "depth": {
+    "scale": 0.44,
+    "curve": 1.88,
+    "edgeCutoff": 0.29,
+    "fade": 1,
+    "occlusion": true
+  },
+  "look": {
+    "colorMode": "mono-light",
+    "background": "#252525",
+    "blending": "normal",
+    "brightness": 0.2,
+    "dropout": 0,
+    "jitter": 0,
+    "scatter": 0,
+    "spread": 2,
+    "duoA": "#1d2a6b",
+    "duoB": "#ffb46b"
+  },
+  "morph": {
+    "word": "",
+    "hold": 0.3,
+    "duration": 1.8,
+    "stagger": 0.58,
+    "order": "near-first",
+    "ease": "inOutSine",
+    "curlAmp": 0.3,
+    "curlScale": 0.9,
+    "curlSpeed": 0.4,
+    "burst": 0,
+    "swirl": 0.35,
+    "zPush": 0
+  },
+  "intro": {
+    "assemble": 1.6,
+    "font": "\"Plus Jakarta Sans\", system-ui, sans-serif",
+    "weight": 500,
+    "tracking": 0,
+    "size": 0.2,
+    "order": "left-right",
+    "front": 0.93,
+    "mode": "fly",
+    "flight": 1.6,
+    "spread": 1,
+    "loose": 0.06
+  },
+  "life": {
+    "move": 0.006,
+    "rest": 0.0015,
+    "restless": 0.2,
+    "speed": 0.35,
+    "settle": 2.5
+  },
+  "photo": {
+    "enabled": true,
+    "delay": 0.5,
+    "duration": 2,
+    "blur": 0,
+    "depthSoft": 1,
+    "depthGrow": 1.6,
+    "limit": 8,
+    "grain": 0.68,
+    "lens": 0.26,
+    "lensSoftness": 0.85,
+    "trail": 2,
+    "rough": 0.85
+  },
+  "camera": {
+    "fov": 10,
+    "zoom": 1.09,
+    "centerX": 0.495,
+    "centerY": 0.41,
+    "limit": 13,
+    "parallax": 1,
+    "fit": "cover",
+    "focus": 0.65,
+    "aperture": 0.4,
+    "follow": 0.11
+  },
+  "eyesCrop": {
+    "centerX": 0.496,
+    "centerY": 0.363,
+    "spanX": 0.29
+  },
+  "interaction": {
+    "repelRadius": 0,
+    "repelForce": 0,
+    "repelDepth": 0,
+    "glow": 2
+  },
+  "recede": {
+    "zoom": 1,
+    "blur": 1.15,
+    "parallax": 1,
+    "limit": 7
+  }
+}

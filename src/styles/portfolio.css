@@ -1,0 +1,74 @@
+.portfolio { z-index: 2; color: #fff; }
+.portfolio a, .portfolio button { pointer-events: auto; }
+.portfolio__bar {
+  position: absolute; top: calc(50% - 25.8rem); inset-inline: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: 4.5rem;
+}
+.filters { display: flex; gap: 1.5rem; font-size: 1.8rem; line-height: 2.3rem; letter-spacing: -0.06em; }
+.filters__item, .views__item { background: none; border: 0; padding: 0; font: inherit; color: var(--fg-dim); cursor: pointer; }
+.filters__item { padding-right: 0.06em; }
+.filters__item.is-current, .views__item.is-current, .filters__item:hover, .views__item:hover { color: #fff; }
+.views { display: flex; gap: 0.6rem; }
+.views__item { padding: 0.4rem; }
+.views__item svg { display: block; width: 2.2rem; height: 1.4rem; fill: none; stroke: currentColor; stroke-width: 1px; }
+.works, .works__canvas { position: absolute; inset: 0; }
+.works { z-index: 0; }
+.works__canvas { z-index: 0; overflow: clip; pointer-events: auto; touch-action: none; user-select: none; }
+.works__list { position: relative; height: 100%; margin: 0; padding: 0; list-style: none; }
+.works__list li { position: absolute; top: 0; left: 0; }
+.works__list a { display: block; width: 100%; height: 100%; }
+/* The thin frame and four crosses follow the selected plane's screen rect. */
+html[data-state='portfolio'] .is-framed::after {
+  content: ''; position: absolute; inset: -.8rem; border: 1px solid rgb(255 255 255 / .28);
+  pointer-events: none;
+}
+html[data-state='portfolio'] .is-framed::before {
+  content: ''; position: absolute; inset: calc(-.8rem - 6px); pointer-events: none;
+  --hair: linear-gradient(rgb(255 255 255 / .8), rgb(255 255 255 / .8));
+  background:
+    var(--hair) left 0 top 6px / 12px 1px, var(--hair) right 0 top 6px / 12px 1px,
+    var(--hair) left 0 bottom 6px / 12px 1px, var(--hair) right 0 bottom 6px / 12px 1px,
+    var(--hair) left 6px top 0 / 1px 12px, var(--hair) right 6px top 0 / 1px 12px,
+    var(--hair) left 6px bottom 0 / 1px 12px, var(--hair) right 6px bottom 0 / 1px 12px;
+  background-repeat: no-repeat;
+}
+.works__list a:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.works__thumbnail { display: none; }
+.works__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.works__caption {
+  position: absolute; left: 0; right: 0; top: calc(50% + 22.025rem); width: 33.9rem; margin: 0 auto;
+  z-index: 1; text-align: center; letter-spacing: -0.06em; pointer-events: none;
+}
+.works__caption span { display: block; padding-right: 0.06em; }
+.works__caption .works__title { font-size: 2.4rem; line-height: 3.1rem; font-weight: 500; }
+.works__caption .works__subtitle { font-size: 1.8rem; line-height: 2.3rem; color: var(--fg-dim); }
+.portfolio[data-view='grid'] .portfolio__bar { top: 8rem; }
+.portfolio[data-view='grid'] .works__canvas { overflow: hidden auto; overscroll-behavior: contain; touch-action: pan-y; }
+.portfolio[data-view='grid'] .works__caption { display: none; }
+.portfolio[data-view='grid'] .works__label {
+  inset: auto 0 0; width: auto; height: auto; padding: 2rem; clip-path: none;
+  background: linear-gradient(transparent, rgb(0 0 0 / .75)); font-size: 2rem; letter-spacing: -.04em;
+}
+.portfolio[data-view='grid'] .works__label .works__subtitle { display: block; font-size: 1.5rem; }
+.portfolio[data-still] .works__list {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem;
+  height: auto; padding: 14rem 6rem 6rem;
+}
+.portfolio[data-still] .works__list li { position: relative; aspect-ratio: 16 / 9; }
+.portfolio[data-still] .works__thumbnail, .stage--lost ~ main .works__thumbnail {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+.portfolio[data-still] .views { display: none; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .portfolio[data-still] li { overflow: hidden; }
+  .portfolio[data-still] a:hover img, .portfolio[data-still] a:focus-visible img { transform: scale(1.02); }
+}
+@media (orientation: portrait), (width <= 767px) {
+  .portfolio__bar { top: auto; bottom: calc(51.5% + 25vw + 3rem); gap: 2rem; }
+  .filters { gap: 1rem; }
+  .works__caption { top: calc(48.5% + 25vw + 2rem); width: min(90%, 30rem); }
+  .portfolio[data-view='grid'] .portfolio__bar { bottom: auto; }
+  .portfolio[data-still] .works__list { gap: 1rem; padding: 13rem 1.6rem 2rem; }
+  .portfolio[data-view='grid'] .works__label { padding: 1rem; font-size: 1.4rem; }
+  .portfolio[data-view='grid'] .works__label .works__subtitle { font-size: 1.1rem; }
+}

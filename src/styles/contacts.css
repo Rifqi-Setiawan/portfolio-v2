@@ -1,0 +1,71 @@
+.contacts {
+  --bg: #d9ccb4; --fg: #1d1915; --fg-rgb: 29 25 21; --accent: #b5401e;
+  z-index: 6; color: var(--fg);
+  background: var(--bg) url('./contacts-vignette.png') center / 100% 100% no-repeat;
+  overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none;
+}
+.contacts::-webkit-scrollbar { display: none; }
+.contacts::before {
+  /* The fixed nine-slice follows the scrollport while its contents scroll underneath. */
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  border: 1px solid transparent;
+  border-image: url('./contacts-edge.png') 48 / 6rem;
+}
+html[data-state='contacts'] .contacts { pointer-events: auto; }
+.contacts__inner { box-sizing: border-box; position: absolute; top: 0; left: 50%; width: 92.4rem; margin-left: -46.2rem; padding: 9.31rem 0 4.9rem; letter-spacing: -0.03em; }
+.contacts__meta { display: flex; justify-content: space-between; margin-bottom: 1.1rem; font-size: 1.59rem; line-height: 1.96rem; color: rgb(var(--fg-rgb) / 0.82); }
+.contacts__time { display: flex; align-items: center; gap: 0.98rem; font-feature-settings: 'tnum'; }
+.contacts__dot { width: 0.86rem; height: 0.86rem; border-radius: 50%; background: var(--accent); }
+.contacts__portrait { position: relative; width: 100%; aspect-ratio: var(--eyes-aspect); transform-origin: center; }
+.contacts__portrait::before, .contacts__tone, .contacts__eyes, .contacts__corners { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+:is(html[data-state='contacts'], .is-contact-overlay) .contacts__portrait:not(:has(.contacts__tone[data-ready]))::before {
+  content: ''; background: url('/scenes/about/photo.webp') var(--eyes-background) no-repeat;
+  filter: grayscale(1) contrast(.82); opacity: calc(.72 * var(--eyes-tone, 0)); mix-blend-mode: multiply;
+  mask-image: radial-gradient(circle, #000 .65px, transparent 1.1px), linear-gradient(90deg, transparent 7%, black 24% 76%, transparent 93%);
+  mask-size: 2px 2px, 100% 100%; mask-composite: intersect;
+}
+.contacts__portrait:not(:has([data-ready])) { --eyes-tone: 1; }
+.contacts__eyes { display: block; opacity: calc(1 - var(--eyes-tone, 0)); }
+.contacts__tone { opacity: var(--eyes-tone, 0); }
+.is-expanding-eyes .contacts__portrait::before, .is-expanding-eyes .contacts__tone { visibility: hidden; }
+.contacts__corners { overflow: clip; }
+.contacts__corners i {
+  --rest: calc((1 - var(--bracket-drawn, 1)) * 100%);
+  position: absolute; width: .95rem; height: .95rem;
+  border: solid rgb(var(--fg-rgb) / .75);
+}
+.contacts__corners i:nth-child(1) { top: 0; left: 0; border-width: 1px 0 0 1px; clip-path: inset(0 var(--rest) var(--rest) 0); }
+.contacts__corners i:nth-child(2) { top: 0; right: 0; border-width: 1px 1px 0 0; clip-path: inset(0 0 var(--rest) var(--rest)); }
+.contacts__corners i:nth-child(3) { bottom: 0; left: 0; border-width: 0 0 1px 1px; clip-path: inset(var(--rest) var(--rest) 0 0); }
+.contacts__corners i:nth-child(4) { bottom: 0; right: 0; border-width: 0 1px 1px 0; clip-path: inset(var(--rest) 0 0 var(--rest)); }
+.contacts__links { display: flex; justify-content: space-between; margin-top: 1.1rem; font-size: 5.63rem; line-height: 6.86rem; font-weight: 600; letter-spacing: -0.09em; color: var(--accent); }
+.contacts__link { display: block; color: inherit; overflow: clip; overflow-clip-margin: .7em; }
+.contacts__liquid { display: block; width: max-content; padding-right: 0.09em; }
+.contacts__form { margin-top: 11.02rem; }
+.contacts__fields { display: grid; grid-template-columns: 1fr 2fr; gap: 2.45rem; margin-bottom: 3.92rem; }
+.contacts__name, .contacts__box {
+  width: 100%; border: 0; border-bottom: 1px solid rgb(var(--fg-rgb) / 0.55); border-radius: 0; background: none;
+  color: var(--fg); font: inherit; font-size: 1.96rem; letter-spacing: -0.03em; outline: none; padding: 0 0.24rem; height: 4.9rem;
+}
+.contacts__box { display: block; height: auto; min-height: 17.14rem; padding-top: 1.22rem; resize: vertical; }
+.contacts__box::-webkit-resizer {
+  /* Keep the native drag target and paint its grip without the platform theme shader. */
+  border: 0;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 10L10 2M7 10l3-3' fill='none' stroke='%23665f54'/%3E%3C/svg%3E") right bottom / 12px 12px no-repeat;
+}
+.contacts__name:focus, .contacts__box:focus { border-bottom-color: var(--accent); }
+.contacts__name[aria-invalid='true'], .contacts__box[aria-invalid='true'] { border-bottom-color: #842f16; }
+.contacts__trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); padding: 0; border: 0; }
+.contacts__error, .contacts__status { margin: .8rem 0 0; font-size: 1.59rem; line-height: 1.3; }
+.contacts__error, .contacts__status[data-state='error'] { color: #842f16; }
+.contacts__error:empty, .contacts__status:empty { margin: 0; }
+.contacts__send { display: block; width: 100%; height: 8.57rem; margin-top: 3.43rem; border: 0; border-radius: 0.73rem; background: var(--fg); color: var(--bg); font: inherit; font-size: 1.96rem; cursor: pointer; }
+.contacts__send:disabled { opacity: .65; cursor: progress; }
+.contacts__legal { display: flex; justify-content: space-between; margin: 4.9rem 0 0; font-size: 1.59rem; color: rgb(var(--fg-rgb) / 0.82); }
+@media (orientation: portrait), (width <= 767px) {
+  .contacts__inner { width: auto; left: 0; right: 0; margin: 0; padding: 8rem 2rem 4rem; }
+  .contacts__links { display: grid; grid-template-columns: 1fr 1fr; font-size: 3.4rem; line-height: 4.2rem; margin-top: 3rem; }
+  .contacts__link:nth-child(2n) { justify-self: end; }
+  .contacts__fields { grid-template-columns: 1fr; gap: 1.2rem; }
+  .contacts__form { margin-top: 4rem; }
+}

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.superpowers/
+.venv/
+raw-assets/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+.DS_Store
