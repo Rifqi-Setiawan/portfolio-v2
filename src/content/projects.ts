@@ -301,9 +301,8 @@ const entries: Project[] = [
       stack: ['Python', 'Streamlit', 'LangGraph', 'openpyxl', 'SQLite', 'PostgreSQL'],
     },
     links: {},
-    cover: '/media/agentic-ai-kms/cover-1200.webp',
+    cover: '/media/agentic-ai-kms/cover-1200.webp?v=c46bd9a767d8',
     media: [
-      full('/media/agentic-ai-kms/01.webp', 'CABAI-KMS input screen for a field workbook and an optional photo folder', 4 / 3),
       full('/media/agentic-ai-kms/result-inspector.webp', 'Inspektor Hasil showing 10 accepted attribute mappings and 3 awaiting human review in one evaluation run', 1600 / 1100),
     ],
     how: [
@@ -373,5 +372,5 @@ const entries: Project[] = [
 // media keep their native aspect ratios so diagrams and screenshots stay legible.
 export const projects: Project[] = entries.map((project) => ({
   ...project,
-  media: [full(`/media/${project.slug}/cover-2000.webp`, `${project.title} project cover`), ...project.media],
+  media: [full(project.cover.replace('-1200.webp', '-2000.webp'), `${project.title} project cover`), ...project.media],
 }));

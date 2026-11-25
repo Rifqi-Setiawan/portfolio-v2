@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import { content } from '../../src/content';
 
 const slugs = ['tribunpass', 'techhiring', 'national-food-lakehouse', 'wellmom', 'smokeguard', 'tel-u-cup', 'agentic-ai-kms', 'partpilot'];
@@ -7,6 +9,15 @@ const bySlug = (s: string) => content.projects.find((p) => p.slug === s)!;
 describe('content', () => {
   it('has eight projects in spec order', () => {
     expect(content.projects.map((p) => p.slug)).toEqual(slugs);
+  });
+
+  it('versions both KMS cover URLs when either image changes', () => {
+    const project = bySlug('agentic-ai-kms');
+    const paths = [1200, 2000].map(width => `/media/agentic-ai-kms/cover-${width}.webp`);
+    const hash = createHash('sha256');
+    for (const path of paths) hash.update(readFileSync(`public${path}`));
+    const revision = hash.digest('hex').slice(0, 12);
+    expect([project.cover, project.media[0].src]).toEqual(paths.map(path => `${path}?v=${revision}`));
   });
 
   it('every project is complete', () => {
