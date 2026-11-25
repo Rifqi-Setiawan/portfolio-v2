@@ -16,8 +16,9 @@ describe('cylindrical carousel', () => {
     expect(blurPx(.04)).toBe(0); expect(blurPx(.29)).toBe(10);
   });
   it('reflows filtered cards across two grid columns', () => {
-    expect(filteredIndices(projects, 'data').map(i => projects[i].slug))
-      .toEqual(['techhiring','national-food-lakehouse','agentic-ai-kms']);
+    expect(filteredIndices(projects, 'backend').map(i => projects[i].slug))
+      .toEqual(['tribunpass', 'wellmom', 'tel-u-cup']);
+    expect(filteredIndices(projects, 'data').map(i => projects[i].slug)).toEqual(['agentic-ai-kms']);
     expect(gridPose(0,2,200,100,10).y).toBe(gridPose(1,2,200,100,10).y);
     expect(gridPose(2,2,200,100,10).x).toBe(gridPose(0,2,200,100,10).x);
   });

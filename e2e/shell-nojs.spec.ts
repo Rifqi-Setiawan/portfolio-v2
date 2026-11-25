@@ -5,9 +5,9 @@ test('the portfolio and its project reader work with scripting disabled', async 
   await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(37, 37, 37)');
   await expect(page.getByRole('heading', { name: 'Muhammad Rifqi Setiawan' })).toBeVisible();
   await page.getByRole('link', { name: 'View all projects' }).click();
-  await page.getByRole('link', { name: /PartPilot/ }).click();
-  await expect(page.getByRole('heading', { name: 'PartPilot', exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Data layer' })).toBeVisible();
+  await page.getByRole('link', { name: /SmokeGuard/ }).click();
+  await expect(page.getByRole('heading', { name: 'SmokeGuard', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Streaming inference' })).toBeVisible();
 });
 
 test('the static project reader shows the photos and links its captioned diagram at full size', async ({ page }) => {

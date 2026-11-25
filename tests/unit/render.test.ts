@@ -14,11 +14,11 @@ const attr = (tag: string, name: string) => new RegExp(`\\s${name}="([^"]*)"`).e
 describe('renderBody', () => {
   const html = renderBody(content);
 
-  it('renders 8 case entries and 8 work items in content order', () => {
+  it('renders five case entries and five work items in content order', () => {
     const entries = html.match(/<article class="case__entry"[^>]*>/g) ?? [];
-    expect(entries).toHaveLength(8);
+    expect(entries).toHaveLength(5);
     const lis = html.match(/<li\b[^>]*\bdata-work\b[^>]*>/g) ?? [];
-    expect(lis).toHaveLength(8);
+    expect(lis).toHaveLength(5);
     const slugs = content.projects.map((p) => p.slug);
     expect(lis.map((t) => attr(t, 'data-case'))).toEqual(slugs);
     expect(entries.map((t) => attr(t, 'data-case'))).toEqual(slugs);
@@ -65,13 +65,14 @@ describe('prerender', () => {
   it('recovers work links on a case-sensitive static host without redirecting unrelated 404s', () => {
     const script = parseHTML(notFoundPage(content)).document.querySelector('script')!.textContent!;
     for (const [path, expected] of [
-      ['/wORk/PartPilot/', '/work/partpilot?from=cv#case-partpilot'],
-      ['/work/no-such-case', '/portfolio?from=cv#case-partpilot'],
+      ['/wORk/WellMom/', '/work/wellmom?from=cv#case-wellmom'],
+      ['/work/partpilot', '/portfolio?from=cv#case-wellmom'],
+      ['/work/no-such-case', '/portfolio?from=cv#case-wellmom'],
       ['/missing-page', undefined],
-      ['/work/partpilot', undefined], // No loop if a valid file is missing from the host.
+      ['/work/wellmom', undefined], // No loop if a valid file is missing from the host.
     ]) {
       let next: string | undefined;
-      const location = { pathname: path, search: '?from=cv', hash: '#case-partpilot', replace: (url: string) => { next = url; } };
+      const location = { pathname: path, search: '?from=cv', hash: '#case-wellmom', replace: (url: string) => { next = url; } };
       runInNewContext(script, { location });
       expect(next).toBe(expected);
     }
@@ -84,8 +85,11 @@ describe('prerender', () => {
     const dist = mkdtempSync(join(tmpdir(), 'dist-'));
     writeFileSync(join(dist, 'index.html'), '<!doctype html><html lang="en"><head><title>Rifqi</title></head><body>x</body></html>');
     const written = await prerender(dist, content, origin);
-    expect(written).toHaveLength(14);
+    expect(written).toHaveLength(11);
     for (const p of written) expect(existsSync(p)).toBe(true);
+    for (const retired of ['partpilot', 'techhiring', 'national-food-lakehouse']) {
+      expect(existsSync(join(dist, 'work', retired, 'index.html'))).toBe(false);
+    }
     expect(existsSync(join(dist, '404.html'))).toBe(true);
     const wm = readFileSync(join(dist, 'work', 'wellmom', 'index.html'), 'utf8');
     expect(wm).toContain('<title>WellMom, ');

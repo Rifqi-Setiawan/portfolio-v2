@@ -5,12 +5,12 @@ test('gallery diagram opens by keyboard before the thumbnail loads and Escape re
   const opener = gallery.locator('[data-zoom]');
   let release!: () => void;
   const waiting = new Promise<void>(resolve => { release = resolve; });
-  await page.route('**/media/techhiring/architecture.png', async route => {
+  await page.route('**/media/smokeguard/architecture.png', async route => {
     await waiting;
     await route.continue();
   });
   try {
-    await page.goto('/work/techhiring?speed=100', { waitUntil: 'domcontentloaded' });
+    await page.goto('/work/smokeguard?speed=100', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('html')).not.toHaveClass(/is-intro/);
     await opener.focus();
     await expect(opener).toBeInViewport();
@@ -19,7 +19,7 @@ test('gallery diagram opens by keyboard before the thumbnail loads and Escape re
   } finally {
     release();
   }
-  await expect(page.locator('dialog[open] img')).toHaveAttribute('src', '/media/techhiring/architecture.png');
+  await expect(page.locator('dialog[open] img')).toHaveAttribute('src', '/media/smokeguard/architecture.png');
   const scrollBefore = await gallery.evaluate(el => el.scrollTop);
   await page.locator('dialog[open]').evaluate(async dialog => {
     dialog.dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: 400 }));
@@ -32,7 +32,7 @@ test('gallery diagram opens by keyboard before the thumbnail loads and Escape re
   await page.keyboard.press('Escape');
   await expect(page.locator('dialog[open]')).toHaveCount(0);
   await expect(opener).toBeFocused();
-  await expect(page).toHaveURL(/\/work\/techhiring\b/);
+  await expect(page).toHaveURL(/\/work\/smokeguard\b/);
 });
 
 // Compare the painted image (or its handoff bitmap) with its unprojected layout box.
@@ -52,10 +52,8 @@ test('WellMom opens flat from the carousel and reopens at the start after scroll
   await page.goto('/portfolio?speed=30');
   await expect(page.locator('html')).not.toHaveClass(/is-intro/);
   const caption = page.locator('.works__caption');
-  for (const name of ['TechHiring.id', 'National Food Lakehouse', 'WellMom']) {
-    await page.keyboard.press('ArrowRight');
-    await expect(caption).toContainText(name);
-  }
+  await page.keyboard.press('ArrowRight');
+  await expect(caption).toContainText('WellMom');
   const card = page.locator('[data-work="wellmom"] a');
   const entry = page.locator('.case__entry[data-case="wellmom"]');
   const panel = entry.locator('.case__panel');

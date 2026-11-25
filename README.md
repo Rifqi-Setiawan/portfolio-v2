@@ -1,6 +1,6 @@
 # portfolio-v2
 
-Portfolio Muhammad Rifqi Setiawan. Situs ini menampilkan delapan studi kasus, galeri proyek, dan potret interaktif yang dibangun dengan TypeScript, Three.js, GSAP, dan Vite.
+Portfolio Muhammad Rifqi Setiawan. Situs ini menampilkan lima studi kasus, galeri proyek, dan potret interaktif yang dibangun dengan TypeScript, Three.js, GSAP, dan Vite.
 
 [Lihat portfolio](https://portfolio.rifqisetiawan.my.id/)
 

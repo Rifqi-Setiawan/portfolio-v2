@@ -50,7 +50,7 @@ test('keyboard opens the centre plane into the lead image and Escape returns to 
   expect(duration).toBeCloseTo(.9, 2);
   await expect(page.locator('html')).toHaveAttribute('data-palette','tribunpass');
   const entry = page.locator('[data-case="tribunpass"]');
-  await expect(entry.locator('.case__count')).toHaveText('01 / 08');
+  await expect(entry.locator('.case__count')).toHaveText('01 / 05');
   expect(await entry.locator('.case__panel').evaluate(el => el.contains(document.activeElement))).toBe(true);
   const box = await entry.locator('.case__media li').first().boundingBox();
   expect(box).toBeTruthy();
@@ -81,7 +81,7 @@ test('next project crossfades the panel in place', async ({page}) => {
   await expect(page).toHaveURL(new RegExp(href+'$'));
   expect((await settled(page)).duration).toBeCloseTo(.85,2);
   const entry = page.locator('.case__entry:not([hidden])');
-  await expect(entry.locator('.case__count')).toHaveText('02 / 08');
+  await expect(entry.locator('.case__count')).toHaveText('02 / 05');
   await entry.locator('.case__count [rel=prev]').click();
   await expect(page).toHaveURL(/\/work\/tribunpass$/);
   expect((await settled(page)).duration).toBeCloseTo(.85,2);
@@ -92,13 +92,13 @@ test('opening a filtered grid card and moving to an excluded case returns to a v
   await expect(page.locator('html')).not.toHaveClass(/is-intro/);
   await page.locator('button[data-filter=backend]').click();
   await page.locator('button[data-view=grid]').click();
-  await page.locator(firstCard).click();
+  await page.locator('[data-work="wellmom"] a').click();
   await expect(page.locator('html')).toHaveAttribute('data-state','case');
-  await page.locator('[data-case="tribunpass"] .case__count [rel=next]').click();
-  await expect(page.locator('html')).toHaveAttribute('data-palette','techhiring');
+  await page.locator('[data-case="wellmom"] .case__count [rel=next]').click();
+  await expect(page.locator('html')).toHaveAttribute('data-palette','smokeguard');
   await settled(page);
-  await page.locator('[data-case="techhiring"] .case__back').click();
+  await page.locator('[data-case="smokeguard"] .case__back').click();
   await expect(page.locator('html')).toHaveAttribute('data-state','portfolio');
   await expect(page.locator('button[data-filter=all]')).toHaveAttribute('aria-pressed','true');
-  await expect(page.locator('[data-work="techhiring"] a')).toBeFocused();
+  await expect(page.locator('[data-work="smokeguard"] a')).toBeFocused();
 });
