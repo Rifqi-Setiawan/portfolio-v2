@@ -25,7 +25,7 @@ describe('content', () => {
   it('categories match spec', () => {
     const expected: Record<string, string[]> = {
       tribunpass: ['backend'], techhiring: ['data'], 'national-food-lakehouse': ['data'],
-      wellmom: ['backend', 'ai'], smokeguard: ['ai'], 'tel-u-cup': ['backend'],
+      wellmom: ['backend', 'ai'], smokeguard: ['ai'], 'tel-u-cup': ['backend', 'ai'],
       'agentic-ai-kms': ['ai', 'data'], partpilot: ['backend', 'ai'],
     };
     for (const [s, c] of Object.entries(expected)) expect(bySlug(s).categories).toEqual(c);
@@ -53,7 +53,7 @@ describe('content', () => {
 
   it('includes architecture on the diagram projects and omits Snowflake identifiers', () => {
     const withArch = content.projects.filter((p) => p.architecture).map((p) => p.slug);
-    expect(withArch).toEqual(['techhiring', 'national-food-lakehouse', 'wellmom', 'smokeguard', 'partpilot']);
+    expect(withArch).toEqual(['techhiring', 'national-food-lakehouse', 'wellmom', 'smokeguard', 'tel-u-cup', 'partpilot']);
     const s = JSON.stringify(content);
     expect(s).not.toMatch(/snowflakecomputing|\.snowflake\.com/i);
     expect(s).not.toMatch(/snowflake\W{0,3}(account|identifier|locator)/i);
